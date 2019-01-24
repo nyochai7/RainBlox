@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
+using UnityEngine.UI;
+
 public class BloxManager : MonoBehaviour ,IBox
 {
     [SerializeField] SpriteAtlas _spriteAtlas;
 
-    SpriteRenderer _spritRenderer;
+    SpriteRenderer _spriteRenderer;
 
     int _bloxId;
     int _bloxSize;
@@ -15,8 +17,9 @@ public class BloxManager : MonoBehaviour ,IBox
 
 
     private void Start(){
-    _spritRenderer = GetComponent<SpriteRenderer>();
-    
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        this.BloxLives = 1;
+
     }
     public int BloxID
     {
@@ -50,6 +53,7 @@ public class BloxManager : MonoBehaviour ,IBox
     }
 
     private void UpdateBloxLive(int value){
-
+        _spriteRenderer.sprite = _spriteAtlas.GetSprite(value.ToString());
+        Debug.Log(_spriteRenderer.ToString());
     }
 }
