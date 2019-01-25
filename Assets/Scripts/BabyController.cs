@@ -20,6 +20,8 @@ public class BabyController : MonoBehaviour, IDamagable
     private float _usedForceMultiplier;
     [SerializeField]
     private float _chooseDirectionInterval;
+    [SerializeField]
+    private Collider2D _walkBounds;
 
     private bool _isHurtAnimationPlaying = false;
     private bool _isDead = false;
@@ -61,7 +63,8 @@ public class BabyController : MonoBehaviour, IDamagable
 
     private void FixedUpdate()
     {
-        _rigidbody.AddForce(usedDirection * _usedForceMultiplier, ForceMode2D.Impulse);
+        _rigidbody.AddForce(usedDirection * _usedForceMultiplier, ForceMode2D.Force);
+        _rigidbody.MovePosition(_walkBounds.bounds.ClosestPoint(transform.position));
     }
 
     private IEnumerator RandomMovement()
@@ -96,7 +99,7 @@ public class BabyController : MonoBehaviour, IDamagable
         while (animationProgress < 1f)
         {
             animationTimeSeconds += Time.deltaTime;
-            animationProgress = animationTimeSeconds / _hurtAnimationTime;      
+            animationProgress = animationTimeSeconds / (_hurtAnimationTime / 2f);
 
             float redValue = Mathf.Lerp(_originalColor.r, _hurtColor.r, animationProgress);
             float greenValue = Mathf.Lerp(_originalColor.g, _hurtColor.g, animationProgress);
@@ -113,7 +116,7 @@ public class BabyController : MonoBehaviour, IDamagable
         while (animationProgress < 1f)
         {
             animationTimeSeconds += Time.deltaTime;
-            animationProgress = animationTimeSeconds / _hurtAnimationTime;
+            animationProgress = animationTimeSeconds / (_hurtAnimationTime / 2f);
 
             float redValue = Mathf.Lerp(_hurtColor.r, _originalColor.r, animationProgress);
             float greenValue = Mathf.Lerp(_hurtColor.g, _originalColor.g, animationProgress);
