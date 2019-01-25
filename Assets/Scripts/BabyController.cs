@@ -16,11 +16,17 @@ public class BabyController : MonoBehaviour, IDamagable
     private float _hurtAnimationTime;
     [SerializeField]
     private Color _hurtColor;
+    [SerializeField]
+    private float _usedForceMultiplier;
+    [SerializeField]
+    private float _chooseDirectionInterval;
 
     private bool _isHurtAnimationPlaying = false;
     private bool _isDead = false;
     private SpriteRenderer _spriteRenderer;
     private Color _originalColor;
+    private Rigidbody2D _rigidbody;
+    Vector3 usedDirection = Vector3.zero;
 
     public void Hurt(int damageAmount)
     {
@@ -43,8 +49,40 @@ public class BabyController : MonoBehaviour, IDamagable
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         _originalColor = _spriteRenderer.color;
         Health = _baseHealth;
+    }
+
+    public void Start()
+    {
+        StartCoroutine(RandomMovement());
+    }
+
+    private void FixedUpdate()
+    {
+        _rigidbody.AddForce(usedDirection * _usedForceMultiplier, ForceMode2D.Impulse);
+    }
+
+    private IEnumerator RandomMovement()
+    {
+        while (true)
+        {
+            float randomNumber = Random.Range(0f, 1f);
+
+            if (randomNumber < 0.5f)
+            {
+                usedDirection = Vector3.left;
+                _spriteRenderer.flipX = false;
+            }
+            else
+            {
+                usedDirection = Vector3.right;
+                _spriteRenderer.flipX = true;
+            }
+
+            yield return new WaitForSeconds(_chooseDirectionInterval);
+        }
     }
 
     private IEnumerator HurtAnimation()

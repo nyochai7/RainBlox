@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Tree : MonoBehaviour
 {
-    [SerializeField] GameObject blockTemplate;
+    [SerializeField] Rigidbody2D blockTemplate;
     [SerializeField] int minInterval;
     [SerializeField] int maxInterval;
+    [SerializeField] Vector3 spawnThrowForce;
 
     float nextDropTime;
 
@@ -27,10 +28,12 @@ public class Tree : MonoBehaviour
         //Debug.Log("Time left: " + (nextDropTime - Time.time));
         if (Time.time >= nextDropTime)
         {
-            Debug.Log("Creating!!");
 
-            GameObject newBlock = GameObject.Instantiate<GameObject>(blockTemplate, this.transform.position, Quaternion.identity);
-            Debug.Log(newBlock.transform.position);
+            Debug.Log("Creating!!");
+            Rigidbody2D newBlock = GameObject.Instantiate<Rigidbody2D>(blockTemplate);
+            newBlock.transform.position = this.transform.position;
+
+            newBlock.AddForce(spawnThrowForce, ForceMode2D.Impulse);
             CalcNextDropTime();
         }
     }
