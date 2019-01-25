@@ -8,7 +8,6 @@ public class CombinerManager : MonoBehaviour
 	[SerializeField] private GameObject boxManagerPrefab;
 	[SerializeField] private List<CombinerSlot> combinerSlots;
 	[SerializeField] private List<BoxCollider2D> combinerSlotColliders;
-	private IBox currentBlox = null;
 
 	private void Awake()
 	{
@@ -46,8 +45,9 @@ public class CombinerManager : MonoBehaviour
 	private void OnMouseUpOnCombinerSlot(int slotPosition)
 	{
 		Debug.Log(slotPosition);
-		if (currentBlox != null)
+		if (MoveObject.CurrentMovingBlox != null)
 		{
+			IBlox currentBlox = MoveObject.CurrentMovingBlox.GetComponent<IBlox>();
 			if (currentBlox.BloxSize <= GetNumberOfClearSlots())    //put the bloxes in the empty slots
 			{
 				int j = slotPosition;
@@ -60,9 +60,9 @@ public class CombinerManager : MonoBehaviour
 							j = 0;
 						}
 
-						if (combinerSlots[j].Image == null)
+						if (combinerSlots[j].Image.sprite == null)
 						{
-							SetBloxInUISlot(j);
+							SetBloxInUISlot(currentBlox, j);
 							break;
 						}
 					}
@@ -71,9 +71,9 @@ public class CombinerManager : MonoBehaviour
 		}
 	}
 
-	private void SetBloxInUISlot(int slotPosition)
+	private void SetBloxInUISlot(IBlox currentBlox, int slotPosition)
 	{
-		//combinerSlots[slotPosition].Image = currentBlox.Image;
+		combinerSlots[slotPosition].Image.sprite = currentBlox.Sprite;
 		combinerSlots[slotPosition].BloxLives = currentBlox.BloxLives;
 	}
 
@@ -127,7 +127,7 @@ public class CombinerManager : MonoBehaviour
 		float boxLivesAverage = 0;
 		for (int i = 0; i < combinerSlots.Count; i++)
 		{
-			if(combinerSlots[i].Image != null)
+			if(combinerSlots[i].Image.sprite != null)
 			{
 				boxLivesAverage += combinerSlots[i].BloxLives;
 			}

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(BloxManager))]
-public class BoxManagerEditor : Editor
+public class BloxManagerEditor : Editor
 {
     string size="1";
     string lives = "9";
