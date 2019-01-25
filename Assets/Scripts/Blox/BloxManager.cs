@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
-public class BloxManager : MonoBehaviour, IBlox
+public class BloxManager : MonoBehaviour, IBlox, IDamagable
 {
     [SerializeField] int startLives = 1000;
     [SerializeField] SpriteAtlas _spriteAtlas;
@@ -89,5 +89,12 @@ public class BloxManager : MonoBehaviour, IBlox
         int spriteNum = value / (startLives / _spriteAtlas.spriteCount);
         _spriteRenderer.sprite = _spriteAtlas.GetSprite(spriteNum.ToString());
         Debug.Log("Setting spritenum: " + spriteNum.ToString());
-    }   
+    }
+
+
+    public void Hurt(int damageAmount)
+    {
+       this.BloxLives -= 1;
+        Debug.Log("Blox hurt");
+    }
 }
