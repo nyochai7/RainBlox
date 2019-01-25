@@ -731,7 +731,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e08a6b9ad0c3f42a91972dbf59b745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockTemplate: {fileID: 0}
+  blockTemplate: {fileID: 3096010072475909882, guid: 54fbad28af9452b419d5062588fa61fd,
+    type: 3}
   minInterval: 2
   maxInterval: 5
   spawnThrowForce: {x: -3, y: 0, z: 0}
@@ -2124,7 +2125,8 @@ MonoBehaviour:
   rainScript: {fileID: 1879888394}
   timerFg: {fileID: 1232992716}
   timerBg: {fileID: 51675164}
-  timeInterval: 1
+  rainStartInterval: 5
+  rainDuration: 10
 --- !u!4 &2142956814
 Transform:
   m_ObjectHideFlags: 0

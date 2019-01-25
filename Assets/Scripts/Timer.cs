@@ -12,7 +12,8 @@ public class TimesUpEvent : UnityEvent
 
 public class Timer : MonoBehaviour
 {
-    bool isRunning = false;
+    bool isCoolingDown = false;
+    bool isRaining = false;
 
     float timeLeft = 0;
     [SerializeField]
@@ -25,21 +26,23 @@ public class Timer : MonoBehaviour
     private RectTransform timerBg;
 
     [SerializeField]
-    private int timeInterval;
+    private float rainStartInterval;
+    [SerializeField]
+    private float rainDuration;
 
     public event Action OnRain;
 
     public void RestartTimer(int timeLeft)
     {
-        isRunning = true;
+        isCoolingDown = true;
         this.timeLeft = timeLeft;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        isRunning = true;
-        timeLeft = timeInterval;
+        isCoolingDown = true;
+        timeLeft = rainStartInterval;
         rainScript.RainIntensity = 0;
         Debug.Log("TimerStart " + timeLeft.ToString());
     }
@@ -48,19 +51,34 @@ public class Timer : MonoBehaviour
     void Update()
     {
         //Debug.Log(timerFg.sizeDelta.ToString());
-        timerFg.sizeDelta = new Vector2(timerBg.rect.width * (timeLeft / timeInterval), timerBg.rect.height);
-        if (isRunning)
+        if (isCoolingDown)
         {
+            timerFg.sizeDelta = new Vector2(timerBg.rect.width * (timeLeft / rainStartInterval), timerBg.rect.height);
+
             timeLeft -= Time.deltaTime;
             if (timeLeft <= 0)
             {
-                isRunning = false;
-                Debug.Log("Times up!");
-                timeLeft = 0;
                 //LET IT RAINNNNN
+                isCoolingDown = false;
+                isRaining = true;
+                timeLeft = rainDuration;
                 rainScript.RainIntensity = 1;
             }
         }
 
+        if (isRaining)
+        {
+            timerFg.sizeDelta = new Vector2(timerBg.rect.width - (timerBg.rect.width * (timeLeft / rainDuration)), timerBg.rect.height);
+
+            timeLeft -= Time.deltaTime;
+
+            if (timeLeft <= 0)
+            {
+                isRaining = false;
+                isCoolingDown = true;
+                timeLeft = rainStartInterval;
+                rainScript.RainIntensity = 0;
+            }
+        }
     }
 }
