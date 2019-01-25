@@ -108,7 +108,7 @@ namespace DigitalRuby.RainMaker
                         if (bm != null)
                         {
                             bm.BloxLives -= 1;
-                            //Debug.Log("Ding dong " + bm.BloxLives.ToString());
+                            Debug.Log("Ding dong " + bm.BloxLives.ToString());
                         }
 
                         IDamagable damagable = hit.collider.GetComponent<IDamagable>();

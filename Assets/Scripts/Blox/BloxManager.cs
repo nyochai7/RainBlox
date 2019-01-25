@@ -17,7 +17,7 @@ public class BloxManager : MonoBehaviour, IBlox
 
     private void Awake()
     {
-        Debug.Log("Awake");
+        //Debug.Log("Awake");
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _bloxLives = startLives;
@@ -25,7 +25,7 @@ public class BloxManager : MonoBehaviour, IBlox
 
     private void Start()
     {
-        Debug.Log("Start");
+        //Debug.Log("Start");
     }
     public int BloxID
     {
@@ -58,7 +58,7 @@ public class BloxManager : MonoBehaviour, IBlox
                 if (value <= 0)
                 {
                     value = 0;
-                    Debug.Log("life is zero");
+                    //Debug.Log("life is zero");
                     DestroyBlox();
                 }
                 else
@@ -80,7 +80,7 @@ public class BloxManager : MonoBehaviour, IBlox
 
     private void DestroyBlox()
     {
-        Debug.Log("Destroying!");
+        //Debug.Log("Destroying!");
         Destroy(transform.parent.gameObject);
     }
 
@@ -88,6 +88,6 @@ public class BloxManager : MonoBehaviour, IBlox
     {
         int spriteNum = value / (startLives / _spriteAtlas.spriteCount);
         _spriteRenderer.sprite = _spriteAtlas.GetSprite(spriteNum.ToString());
-        //Debug.Log("Setting spritenum: " + spriteNum.ToString());
+        Debug.Log("Setting spritenum: " + spriteNum.ToString());
     }   
 }
