@@ -6,21 +6,21 @@ using UnityEngine.UI;
 
 public class BloxManager : MonoBehaviour, IBlox
 {
-    public int startLives = 8;
+    public int startLives = 1000;
     [SerializeField] SpriteAtlas _spriteAtlas;
     SpriteRenderer _spriteRenderer;
 
     Rigidbody2D _rigidbody2D;
     int _bloxId;
     int _bloxSize;
-
     int _bloxLives;
-
+    
 
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _bloxLives = startLives;
     }
     public int BloxID
     {
@@ -49,16 +49,19 @@ public class BloxManager : MonoBehaviour, IBlox
         get { return _bloxLives; }
         set
         {
-            if (value <= 0)
-            {
-                value = 0;
-                DestroyBlox();
+            if (gameObject != null) {
+                if (value <= 0)
+                {
+                    value = 0;
+                    DestroyBlox();
+                }
+                else
+                {
+                    UpdateBloxLive(_bloxLives);
+                    _bloxLives = value;
+                }
+                
             }
-            else
-            {
-                UpdateBloxLive(_bloxLives);
-            }
-            _bloxLives = value;
         }
     }
 
@@ -71,17 +74,13 @@ public class BloxManager : MonoBehaviour, IBlox
 
     private void DestroyBlox()
     {
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 
     private void UpdateBloxLive(int value)
     {
-       int spriteNum = startLives - value;
-       // Debug.Log("NAAMAAA: " + spriteNum.ToString());
-        _spriteRenderer.sprite = _spriteAtlas.GetSprite(value.ToString());
-        //Debug.Log(_spriteRenderer.ToString());
-    }
 
-
-    
+        int spriteNum = value / (startLives / _spriteAtlas.spriteCount);
+        _spriteRenderer.sprite = _spriteAtlas.GetSprite(spriteNum.ToString());
+    }   
 }
