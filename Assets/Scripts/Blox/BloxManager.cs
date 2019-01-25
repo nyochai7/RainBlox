@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BloxManager : MonoBehaviour, IBlox
 {
-    public int startLives = 1000;
+    [SerializeField] int startLives = 1000;
     [SerializeField] SpriteAtlas _spriteAtlas;
     SpriteRenderer _spriteRenderer;
 
@@ -14,13 +14,18 @@ public class BloxManager : MonoBehaviour, IBlox
     int _bloxId;
     int _bloxSize;
     int _bloxLives;
-    
 
-    private void Start()
+    private void Awake()
     {
+        Debug.Log("Awake");
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _bloxLives = startLives;
+    }
+
+    private void Start()
+    {
+        Debug.Log("Start");
     }
     public int BloxID
     {
@@ -53,6 +58,7 @@ public class BloxManager : MonoBehaviour, IBlox
                 if (value <= 0)
                 {
                     value = 0;
+                    Debug.Log("life is zero");
                     DestroyBlox();
                 }
                 else
@@ -74,13 +80,14 @@ public class BloxManager : MonoBehaviour, IBlox
 
     private void DestroyBlox()
     {
+        Debug.Log("Destroying!");
         Destroy(transform.parent.gameObject);
     }
 
     private void UpdateBloxLive(int value)
     {
-
         int spriteNum = value / (startLives / _spriteAtlas.spriteCount);
         _spriteRenderer.sprite = _spriteAtlas.GetSprite(spriteNum.ToString());
+        //Debug.Log("Setting spritenum: " + spriteNum.ToString());
     }   
 }

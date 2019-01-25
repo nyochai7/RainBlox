@@ -24,10 +24,13 @@ public class Tree : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("Time left: " + (nextDropTime - Time.time));
         if (Time.time >= nextDropTime)
         {
-            GameObject newBlock = GameObject.Instantiate<GameObject>(blockTemplate);
-            newBlock.transform.position = this.transform.position;
+            Debug.Log("Creating!!");
+
+            GameObject newBlock = GameObject.Instantiate<GameObject>(blockTemplate, this.transform.position, Quaternion.identity);
+            Debug.Log(newBlock.transform.position);
             CalcNextDropTime();
         }
     }
