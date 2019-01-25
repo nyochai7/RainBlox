@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CombinerManager : MonoBehaviour
 {
+	[SerializeField] private GameObject boxManagerPrefab;
 	[SerializeField] private List<CombinerSlot> combinerSlots;
+	[SerializeField] private List<BoxCollider2D> combinerSlotColliders;
 	private IBox currentBlox = null;
 
 	private void Awake()
@@ -14,29 +17,35 @@ public class CombinerManager : MonoBehaviour
 
 	private void InitializeCombinerSlots()
 	{
+		combinerSlotColliders = new List<BoxCollider2D>();
+
 		for (int i = 0; i < combinerSlots.Count; i++)
 		{
 			combinerSlots[i].Position = i;
 			combinerSlots[i].OnButtonMouseUp += OnMouseUpOnCombinerSlot;
+			BoxCollider2D collider = combinerSlots[i].GetComponent<BoxCollider2D>();
+			combinerSlotColliders.Add(collider);
 		}
 	}
 
 	private void Update()
 	{
-		//if (Input.GetMouseButtonDown(0))
-		//{
-		//	Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		//	RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
-		//	if (hit)
-		//	{
-		//		Debug.Log(hit.collider.gameObject.name);
-		//	}
-		//}
+		if (Input.GetMouseButtonUp(0))
+		{
+			for (int i = 0; i < combinerSlotColliders.Count; i++)
+			{
+				if (combinerSlotColliders[i].bounds.Contains(Input.mousePosition))
+				{
+					OnMouseUpOnCombinerSlot(i);
+					break;
+				}
+			}
+		}
 	}
 
 	private void OnMouseUpOnCombinerSlot(int slotPosition)
 	{
-		//Debug.Log(slotPosition);
+		Debug.Log(slotPosition);
 		if (currentBlox != null)
 		{
 			if (currentBlox.BloxSize <= GetNumberOfClearSlots())    //put the bloxes in the empty slots
@@ -84,7 +93,33 @@ public class CombinerManager : MonoBehaviour
 
    public void CombineSlots()
 	{
+		float averageBoxLives = GetAvarageBoxLives();
+		int size = combinerSlots.Count - GetNumberOfClearSlots();
+		ClearCombineSlots();
+		EnableSlots(false);
+		CreateNewBlox(averageBoxLives, size);
+	}
 
+	private void ClearCombineSlots()
+	{
+		for (int i = 0; i < combinerSlots.Count; i++)
+		{
+			combinerSlots[i].Image = null;
+			combinerSlots[i].BloxLives = 0;
+		}
+	}
+
+	private void CreateNewBlox(float averageBoxLives, int size)
+	{
+		Instantiate<GameObject>(boxManagerPrefab, combinerSlots[(int)(combinerSlots.Count / 2)].transform);
+	}
+
+	private void EnableSlots(bool isEnabled)
+	{
+		for (int i = 0; i < combinerSlots.Count; i++)
+		{
+			combinerSlots[i].gameObject.SetActive(isEnabled);
+		}
 	}
 
 	private float GetAvarageBoxLives()

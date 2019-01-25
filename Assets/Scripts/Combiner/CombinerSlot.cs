@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
-public class CombinerSlot : MonoBehaviour, /*IPointerClickHandler,*/ IPointerUpHandler//, IPointerDownHandler
+public class CombinerSlot : MonoBehaviour//, /*IPointerClickHandler,*/ /*IPointerUpHandler*///, IPointerDownHandler
 {
 	public int Position { get; set; }
 	public Image Image { get; set; }
@@ -19,16 +19,16 @@ public class CombinerSlot : MonoBehaviour, /*IPointerClickHandler,*/ IPointerUpH
 	//		Debug.Log(Position);
 	//}
 
-	public void OnPointerUp(PointerEventData eventData)
-	{
-		if (eventData.button == PointerEventData.InputButton.Left)
-		{
-			if (OnButtonMouseUp != null)
-			{
-				OnButtonMouseUp.Invoke(Position);
-			}
-		}
-	}
+	//public void OnPointerUp(PointerEventData eventData)
+	//{
+	//	if (eventData.button == PointerEventData.InputButton.Left)
+	//	{
+	//		if (OnButtonMouseUp != null)
+	//		{
+	//			OnButtonMouseUp.Invoke(Position);
+	//		}
+	//	}
+	//}
 
 	//public void OnPointerDown(PointerEventData eventData)
 	//{

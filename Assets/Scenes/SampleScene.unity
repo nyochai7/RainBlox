@@ -1416,12 +1416,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb066266d516154887d0c0d0e8899de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxManagerPrefab: {fileID: 0}
   combinerSlots:
   - {fileID: 386661168}
   - {fileID: 1390768695}
   - {fileID: 837620410}
   - {fileID: 751745786}
   - {fileID: 759900968}
+  combinerSlotColliders: []
 --- !u!1001 &2094584555
 PrefabInstance:
   m_ObjectHideFlags: 0
