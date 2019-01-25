@@ -50,7 +50,8 @@ namespace DigitalRuby.RainMaker
         private void OnParticleCollision(GameObject obj)
         {
 
-            //BloxManager blox = obj.GetComponent<BloxManager>()
+            BloxManager blox = obj.GetComponent<BloxManager>();
+            Debug.Log("Collision! " + blox.ToString());
             if (RainExplosion != null && RainParticleSystem != null)
             {
                 int count = RainParticleSystem.GetCollisionEvents(obj, collisionEvents);

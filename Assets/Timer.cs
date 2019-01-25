@@ -47,7 +47,7 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(timerFg.sizeDelta.ToString());
+        //Debug.Log(timerFg.sizeDelta.ToString());
         timerFg.sizeDelta = new Vector2(timerBg.rect.width * (timeLeft / timeInterval), timerBg.rect.height);
         if (isRunning)
         {

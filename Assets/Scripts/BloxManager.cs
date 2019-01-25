@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
-public class BloxManager : MonoBehaviour ,IBox
+public class BloxManager : MonoBehaviour, IBox
 {
+    [SerializeField]
+    int startLives;
     [SerializeField] SpriteAtlas _spriteAtlas;
 
     SpriteRenderer _spriteRenderer;
@@ -16,9 +18,10 @@ public class BloxManager : MonoBehaviour ,IBox
     int _bloxLives;
 
 
-    private void Start(){
+    private void Start()
+    {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        this.BloxLives = 1;
+        this.BloxLives = startLives;
 
     }
     public int BloxID
@@ -42,8 +45,16 @@ public class BloxManager : MonoBehaviour ,IBox
         get { return _bloxLives; }
         set
         {
+            if (value <= 0)
+            {
+                value = 0;
+                DestroyBlox();
+            }
+            else
+            {
+                UpdateBloxLive(_bloxLives);
+            }
             _bloxLives = value;
-            UpdateBloxLive(_bloxLives);
         }
     }
 
@@ -52,8 +63,16 @@ public class BloxManager : MonoBehaviour ,IBox
 
     }
 
-    private void UpdateBloxLive(int value){
-        _spriteRenderer.sprite = _spriteAtlas.GetSprite(value.ToString());
+    private void DestroyBlox()
+    {
+        //TODO
+    }
+
+    private void UpdateBloxLive(int value)
+    {
+        int spriteNum = value / (startLives / _spriteAtlas.spriteCount);
+        Debug.Log("NAAMAAA: " + spriteNum.ToString());
+        _spriteRenderer.sprite = _spriteAtlas.GetSprite(spriteNum.ToString());
         Debug.Log(_spriteRenderer.ToString());
     }
 }
