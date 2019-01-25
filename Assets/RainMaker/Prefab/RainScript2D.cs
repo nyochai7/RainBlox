@@ -104,13 +104,18 @@ namespace DigitalRuby.RainMaker
                     hit = Physics2D.Raycast(pos, particles[i].velocity.normalized, particles[i].velocity.magnitude * Time.deltaTime);
                     if (hit.collider != null && ((1 << hit.collider.gameObject.layer) & CollisionMask) != 0)
                     {
-                        BloxManager bm = hit.collider.gameObject.GetComponentInChildren<BloxManager>();
+                        BloxManager bm = hit.collider.GetComponentInChildren<BloxManager>();
                         if (bm != null)
                         {
                             bm.BloxLives -= 1;
                             Debug.Log("Ding dong " + bm.BloxLives.ToString());
                         }
 
+                        IDamagable damagable = hit.collider.GetComponent<IDamagable>();
+                        if (damagable != null)
+                        {
+                            damagable.Hurt(1);
+                        }
 
                         if (CollisionLifeTimeRain == 0.0f)
                         {
