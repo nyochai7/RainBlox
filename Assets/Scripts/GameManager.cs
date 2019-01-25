@@ -27,16 +27,19 @@ public class GameManager : MonoBehaviour
         _mainMenu = Instantiate(_mainMenuPrefab, Vector3.zero, Quaternion.identity);
         _mainMenu.playButton.onClick = _mainMenuPlayClickEvent;
 
+        OpenMainMenu();
         DontDestroyOnLoad(gameObject);
     }
 
     public void StartGamePlay()
     {
+        Time.timeScale = 1f;
         _mainMenu.gameObject.SetActive(false);
     }
 
     public void OpenMainMenu()
     {
+        Time.timeScale = 0;
         _mainMenu.gameObject.SetActive(true);
     }
 
