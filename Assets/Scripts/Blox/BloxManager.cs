@@ -81,7 +81,7 @@ public class BloxManager : MonoBehaviour
     }
    private void UpdateBloxLive(int value)
     {
-        float spriteNum = ((float)value / startLives);
+        float spriteNum = ((float)(startLives - value) / startLives);
         int num = (int)(spriteNum*_spriteAtlas.spriteCount);
       //  Debug.Log("boxlives "+ spriteNum);
         _spriteRenderer.sprite = _spriteAtlas.GetSprite(num.ToString());
