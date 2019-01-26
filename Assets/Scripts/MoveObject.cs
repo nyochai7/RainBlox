@@ -51,7 +51,6 @@ public class MoveObject : MonoBehaviour
 	{
 		if (CurrentMovingBlox == fixJointBlox && CurrentMovingBlox != null)
 		{
-			BloxInteractions.EnableAllRigidbodys();
 			CurrentMovingBlox.StickFixJointBlox();
 			isFollowingMouse = false;
 			CurrentMovingBlox = null;

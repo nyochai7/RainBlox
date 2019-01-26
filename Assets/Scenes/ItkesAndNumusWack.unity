@@ -385,9 +385,9 @@ GameObject:
   - component: {fileID: 285217840}
   - component: {fileID: 285217842}
   - component: {fileID: 285217841}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: blox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -621,9 +621,9 @@ GameObject:
   - component: {fileID: 412361242}
   - component: {fileID: 412361244}
   - component: {fileID: 412361243}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: blox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1736,9 +1736,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockTemplate: {fileID: 3096010072475909882, guid: 54fbad28af9452b419d5062588fa61fd,
     type: 3}
-  minInterval: 1
-  maxInterval: 2
-  spawnThrowForce: {x: -6, y: 4, z: 0}
+  minInterval: 3
+  maxInterval: 5
+  spawnThrowForce: {x: -7, y: 6, z: 0}
 --- !u!4 &1148675040
 Transform:
   m_ObjectHideFlags: 0
@@ -3148,9 +3148,9 @@ GameObject:
   - component: {fileID: 1763140712}
   - component: {fileID: 1763140711}
   - component: {fileID: 1763140713}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: blox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
