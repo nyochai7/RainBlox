@@ -33,7 +33,9 @@ public class BloxInteractions : MonoBehaviour
 
 	private static void EnableRigidbody(FixJointBlox fixJointBlox, bool isEnabled)
 	{
-		if (isEnabled)
+        if (fixJointBlox.RigidBody.bodyType == RigidbodyType2D.Static) return;
+
+        if (isEnabled)
 		{
 			fixJointBlox.RigidBody.bodyType = RigidbodyType2D.Dynamic;
 			fixJointBlox.RigidBody.constraints = RigidbodyConstraints2D.None;

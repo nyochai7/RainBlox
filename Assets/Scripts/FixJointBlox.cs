@@ -16,7 +16,7 @@ public class FixJointBlox : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (collision.otherRigidbody.CompareTag("ground"))
+		if (collision.gameObject.CompareTag("ground"))
 		{
 			return;
 		}
