@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class BabyController : MonoBehaviour, IDamagable
 {
@@ -21,6 +21,8 @@ public class BabyController : MonoBehaviour, IDamagable
     [SerializeField]
     private float _chooseDirectionInterval;
     [SerializeField]
+    private Image _livesBarImage;
+    [SerializeField]
     private Collider2D _walkBounds;
 
     private bool _isHurtAnimationPlaying = false;
@@ -36,7 +38,7 @@ public class BabyController : MonoBehaviour, IDamagable
 
         int postDamageHealth = Health - damageAmount;
         Health = Mathf.Clamp(postDamageHealth, MIN_HEALTH, _baseHealth);
-
+        _livesBarImage.fillAmount = (float)Health/_baseHealth;
         if (_isHurtAnimationPlaying == false)
         {
             StartCoroutine(HurtAnimation());
@@ -47,7 +49,7 @@ public class BabyController : MonoBehaviour, IDamagable
             Die();
         }
     }
-
+    
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
