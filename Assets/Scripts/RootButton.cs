@@ -9,7 +9,6 @@ public class RootButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         foreach(Selectable selectableChild in gameObject.GetComponentsInChildren<Selectable>())
         {
             PointerEventData newEventData = eventData;
-
             newEventData.position = selectableChild.transform.position;
             selectableChild.OnPointerUp(newEventData);
         }      
@@ -42,7 +41,6 @@ public class RootButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         foreach (Selectable selectableChild in gameObject.GetComponentsInChildren<Selectable>())
         {
             PointerEventData newEventData = eventData;
-
             newEventData.position = selectableChild.transform.position;
             selectableChild.OnPointerEnter(newEventData);
         }

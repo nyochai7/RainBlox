@@ -102,6 +102,7 @@ namespace DigitalRuby.RainMaker
                 {
                     Vector3 pos = particles[i].position + RainFallParticleSystem.transform.position;
                     hit = Physics2D.Raycast(pos, particles[i].velocity.normalized, particles[i].velocity.magnitude * Time.deltaTime);
+
                     if (hit.collider != null && ((1 << hit.collider.gameObject.layer) & CollisionMask) != 0)
                     {
 
@@ -121,6 +122,20 @@ namespace DigitalRuby.RainMaker
                             particles[i].remainingLifetime = Mathf.Min(particles[i].remainingLifetime, UnityEngine.Random.Range(CollisionLifeTimeRain * 0.5f, CollisionLifeTimeRain * 2.0f));
                             pos += (particles[i].velocity * Time.deltaTime);
                         }
+
+                        BloxManager bm = hit.collider.GetComponentInChildren<BloxManager>();	
+                      
+                        if (bm != null)	
+                        {	
+                            bm.BloxLives -= 1;	
+
+                            if(bm.BloxLives <=0){
+                           //  bm.GetParent().SetActive(false);
+                             Destroy(bm.GetParent());
+                            }
+                         //   Debug.Log("Ding dong " + bm.BloxLives.ToString());	
+                        }
+
                         changes = true;
                     }
                 }

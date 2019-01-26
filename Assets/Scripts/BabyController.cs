@@ -32,13 +32,15 @@ public class BabyController : MonoBehaviour, IDamagable
     private Rigidbody2D _rigidbody;
     Vector3 usedDirection = Vector3.zero;
 
+    bool firstTimr = true;
+
     public void Hurt(int damageAmount)
     {
         if (_isDead) return;
 
         int postDamageHealth = Health - damageAmount;
         Health = Mathf.Clamp(postDamageHealth, MIN_HEALTH, _baseHealth);
-        _livesBarImage.fillAmount = (float)Health/_baseHealth;
+        _livesBarImage.fillAmount = (float)Health / _baseHealth;
         if (_isHurtAnimationPlaying == false)
         {
             StartCoroutine(HurtAnimation());
@@ -49,7 +51,7 @@ public class BabyController : MonoBehaviour, IDamagable
             Die();
         }
     }
-    
+
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -58,9 +60,23 @@ public class BabyController : MonoBehaviour, IDamagable
         Health = _baseHealth;
     }
 
+    private IEnumerator PlayBabySound()
+    {
+        if(!firstTimr){
+        AudioSource ac = SoundManager.Instance.Play("baby_crying");
+        while (ac.isPlaying)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        }
+        firstTimr = false;
+        yield return new WaitForSeconds(UnityEngine.Random.Range(5,10));
+        StartCoroutine(PlayBabySound());
+    }
     public void Start()
     {
         StartCoroutine(RandomMovement());
+       StartCoroutine( PlayBabySound());
     }
 
     private void FixedUpdate()
@@ -79,6 +95,7 @@ public class BabyController : MonoBehaviour, IDamagable
             {
                 usedDirection = Vector3.left;
                 _spriteRenderer.flipX = false;
+
             }
             else
             {
@@ -134,5 +151,6 @@ public class BabyController : MonoBehaviour, IDamagable
     private void Die()
     {
         _isDead = true;
+        SoundManager.Instance.Play("game_over");
     }
 }

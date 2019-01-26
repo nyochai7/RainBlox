@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BloxManager : MonoBehaviour
 {
-    public int startLives = 8;
+    public int startLives = 1000;
     [SerializeField] SpriteAtlas _spriteAtlas;
     SpriteRenderer _spriteRenderer;
 
@@ -16,11 +16,14 @@ public class BloxManager : MonoBehaviour
 
     int _bloxLives;
 
+    AudioSource ac;
+
 
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _bloxLives = startLives;
     }
     public int BloxID
     {
@@ -39,22 +42,30 @@ public class BloxManager : MonoBehaviour
         }
     }
 
-    public int BloxLives
+   public int BloxLives
     {
         get { return _bloxLives; }
         set
         {
-            if (value <= 0)
-            {
-                value = 0;
-                DestroyBlox();
+            if (gameObject != null) {
+                if (value <= 0)
+                {
+                    _bloxLives =0;
+                    Debug.Log("life is zero");
+                }
+                else
+                {
+                     _bloxLives = value;
+                    UpdateBloxLive(_bloxLives);
+                }
+                
             }
-            else
-            {
-                UpdateBloxLive(_bloxLives);
-            }
-            _bloxLives = value;
         }
+    }
+    public void PlaySound(){
+        if(ac == null){
+        ac =  SoundManager.Instance.Play("drop_in_Water");
+        } 
     }
 
     private void SetBloxSize(int size)
@@ -64,19 +75,18 @@ public class BloxManager : MonoBehaviour
         _rigidbody2D.mass = size;
     }
 
-    private void DestroyBlox()
+    public GameObject GetParent(){
+        Debug.Log(transform.parent.gameObject.name);
+         Debug.Log(transform.gameObject.name);
+          Debug.Log("lllllllllllllll");
+        return transform.parent.gameObject;
+    }
+   private void UpdateBloxLive(int value)
     {
-        Destroy(gameObject);
+        int spriteNum = value / (startLives / _spriteAtlas.spriteCount);
+      //  Debug.Log("boxlives "+ spriteNum);
+        _spriteRenderer.sprite = _spriteAtlas.GetSprite(spriteNum.ToString());
+      //  Debug.Log("Setting spritenum: " + spriteNum.ToString());
     }
 
-    private void UpdateBloxLive(int value)
-    {
-      //  int spriteNum = value / (startLives / _spriteAtlas.spriteCount);
-       // Debug.Log("NAAMAAA: " + spriteNum.ToString());
-        _spriteRenderer.sprite = _spriteAtlas.GetSprite(value.ToString());
-        //Debug.Log(_spriteRenderer.ToString());
-    }
-
-
-    
 }
