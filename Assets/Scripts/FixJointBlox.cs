@@ -82,22 +82,25 @@ public class FixJointBlox : MonoBehaviour
 		if (MoveObject.CurrentMovingBlox == this)
 		{
 			FixJointBlox fixJointBlox = null;
-			float radius = 1.28f;
+			float radius = GetComponent<Collider2D>().bounds.size.x;
 
 			for (int i = 0; i < Colliders.Count; i++)
 			{
-				float distance = Vector3.Distance(Colliders[i].gameObject.transform.position, MoveObject.currentMovingBlox.transform.position);
-				if (distance != 0)
-				{
-					if (distance < (radius * 1.1f))
-					{
-						fixJointBlox = Colliders[i].gameObject.GetComponent<FixJointBlox>();
-						if (fixJointBlox != this && fixJointBlox != null)
-						{
-							break;
-						}
-					}
-				}
+                Vector3 direction = (Colliders[i].gameObject.transform.position - MoveObject.currentMovingBlox.transform.position).normalized;
+
+                Collider2D[] overlappingColliders = Physics2D.OverlapBoxAll((Vector2)transform.position,
+                                                                       (Vector2)GetComponent<Collider2D>().bounds.size,
+                                                                        transform.rotation.eulerAngles.z,
+                                                                        LayerMask.GetMask("Blox"));
+
+                foreach(Collider2D collider in overlappingColliders)
+                {
+                    fixJointBlox = collider.GetComponent<FixJointBlox>();
+                    if (fixJointBlox != this && fixJointBlox != null)
+                    {
+                        break;
+                    }
+                }
 			}
 
 			if (fixJointBlox != null && fixJointBlox != this)
