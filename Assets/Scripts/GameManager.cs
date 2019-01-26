@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGamePlay()
     {
+        SoundManager.Instance.Play("click");
         Time.timeScale = 1f;
         _mainMenu.gameObject.SetActive(false);
     }
