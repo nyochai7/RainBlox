@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.09.00">
+    <object class="AudioFile" id="{aee1c2cd-d3b7-4feb-a624-ea4c6a2d6609}">
+        <property name="assetPath">
+            <value>BabyRain_Thunder-02.ogg</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>3.75</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{3cb5ef00-5d8c-47ce-ab01-f820bf559540}</destination>
+        </relationship>
+    </object>
+</objects>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using DigitalRuby.RainMaker;
+using FMOD.Studio;
 using System;
 
 public class TimesUpEvent : UnityEvent
@@ -12,6 +13,8 @@ public class TimesUpEvent : UnityEvent
 
 public class Timer : MonoBehaviour
 {
+    public string EVENT_NAME = "event:/New Event";
+
     bool isCoolingDown = false;
     bool isRaining = false;
 
@@ -38,6 +41,9 @@ public class Timer : MonoBehaviour
 
     public event Action OnRain;
 
+    private EventInstance audioEvent;
+    private ParameterInstance fmodEvent;
+
     public void RestartTimer(int timeLeft)
     {
         isCoolingDown = true;
@@ -58,6 +64,11 @@ public class Timer : MonoBehaviour
         timeLeft = rainStartInterval;
         rainScript.RainIntensity = 0;
         Debug.Log("TimerStart " + timeLeft.ToString());
+        audioEvent = FMODUnity.RuntimeManager.CreateInstance(EVENT_NAME);
+        audioEvent.getParameter("MusicChange", out fmodEvent);
+        audioEvent.start();
+
+        fmodEvent.setValue(0);
     }
 
     // Update is called once per frame
@@ -76,6 +87,8 @@ public class Timer : MonoBehaviour
                 isRaining = true;
                 timeLeft = rainDuration;
                 rainScript.RainIntensity = 1;
+                fmodEvent.setValue(1);
+
                StartCoroutine(ShowLightning());
             }
         }
@@ -92,6 +105,8 @@ public class Timer : MonoBehaviour
                 isCoolingDown = true;
                 timeLeft = rainStartInterval;
                 rainScript.RainIntensity = 0;
+                fmodEvent.setValue(0);
+
             }
         }
     }
