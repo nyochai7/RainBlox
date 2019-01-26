@@ -109,7 +109,6 @@ GameObject:
   - component: {fileID: 3096010072475909882}
   - component: {fileID: 6881011426155494130}
   - component: {fileID: 909063827433138419}
-  - component: {fileID: 4383979007416869847}
   m_Layer: 8
   m_Name: Block
   m_TagString: blox
@@ -240,6 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Colliders: []
+  FixJoints: []
   RigidBody: {fileID: 0}
 --- !u!114 &909063827433138419
 MonoBehaviour:
@@ -253,18 +253,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f979eb216733cf84aad6e096918dd034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4383979007416869847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3096010072475909886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f55548442f2e2c46a16c4424fac75c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startLives: 8
-  _spriteAtlas: {fileID: 4343727234628468602, guid: ee4468e06cd003b4a88718bac445bf64,
-    type: 2}

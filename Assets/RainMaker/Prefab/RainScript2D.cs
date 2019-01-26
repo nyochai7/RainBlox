@@ -103,7 +103,22 @@ namespace DigitalRuby.RainMaker
                     Vector3 pos = particles[i].position + RainFallParticleSystem.transform.position;
                     hit = Physics2D.Raycast(pos, particles[i].velocity.normalized, particles[i].velocity.magnitude * Time.deltaTime);
 
-                    if (hit.collider != null && ((1 << hit.collider.gameObject.layer) & CollisionMask) != 0)
+                    if (hit.collider != null && hit.collider.tag == "blox")
+                    {
+                        BloxManager bm = hit.collider.GetComponentInChildren<BloxManager>();
+                        if (bm != null)
+                        {
+                            bm.BloxLives -= 4;
+
+                            if (bm.BloxLives <= 0)
+                            {
+                                // bm.GetParent().SetActive(false);
+                                Destroy(bm.GetParent());
+                            }
+
+                        }
+                    }
+                    if (hit.collider != null && (LayerMask.GetMask(LayerMask.LayerToName(hit.collider.gameObject.layer)) & CollisionMask) != 0)
                     {
 
                         IDamagable damagable = hit.collider.GetComponentInChildren<IDamagable>();
@@ -123,18 +138,7 @@ namespace DigitalRuby.RainMaker
                             pos += (particles[i].velocity * Time.deltaTime);
                         }
 
-                        BloxManager bm = hit.collider.GetComponentInChildren<BloxManager>();	
-                      
-                        if (bm != null)	
-                        {	
-                            bm.BloxLives -= 1;	
 
-                            if(bm.BloxLives <=0){
-                           //  bm.GetParent().SetActive(false);
-                             Destroy(bm.GetParent());
-                            }
-                         //   Debug.Log("Ding dong " + bm.BloxLives.ToString());	
-                        }
 
                         changes = true;
                     }
@@ -176,7 +180,7 @@ namespace DigitalRuby.RainMaker
             for (int i = 0; i < count; i++)
             {
                 Vector3 pos = particles[i].position + RainMistParticleSystem.transform.position;
-                hit = Physics2D.Raycast(pos, particles[i].velocity.normalized, particles[i].velocity.magnitude* Time.deltaTime, CollisionMask);
+                hit = Physics2D.Raycast(pos, particles[i].velocity.normalized, particles[i].velocity.magnitude * Time.deltaTime, CollisionMask);
                 if (hit.collider != null)
                 {
                     particles[i].velocity *= RainMistCollisionMultiplier;
