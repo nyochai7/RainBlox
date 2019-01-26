@@ -385,9 +385,11 @@ GameObject:
   - component: {fileID: 285217840}
   - component: {fileID: 285217842}
   - component: {fileID: 285217841}
-  m_Layer: 0
+  - component: {fileID: 285217844}
+  - component: {fileID: 285217843}
+  m_Layer: 8
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: blox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -480,6 +482,42 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &285217843
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285217839}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &285217844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285217839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0237282f929da3f49a795092b98711ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Colliders: []
+  FixJoints: []
+  RigidBody: {fileID: 0}
 --- !u!1 &334380272
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,9 +659,11 @@ GameObject:
   - component: {fileID: 412361242}
   - component: {fileID: 412361244}
   - component: {fileID: 412361243}
-  m_Layer: 0
+  - component: {fileID: 412361246}
+  - component: {fileID: 412361245}
+  m_Layer: 8
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: blox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -716,6 +756,42 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &412361245
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412361241}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &412361246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412361241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0237282f929da3f49a795092b98711ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Colliders: []
+  FixJoints: []
+  RigidBody: {fileID: 0}
 --- !u!1 &425163910
 GameObject:
   m_ObjectHideFlags: 0
@@ -3148,9 +3224,11 @@ GameObject:
   - component: {fileID: 1763140712}
   - component: {fileID: 1763140711}
   - component: {fileID: 1763140713}
-  m_Layer: 0
+  - component: {fileID: 1763140715}
+  - component: {fileID: 1763140714}
+  m_Layer: 8
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: blox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3243,6 +3321,42 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.56, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &1763140714
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763140710}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &1763140715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763140710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0237282f929da3f49a795092b98711ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Colliders: []
+  FixJoints: []
+  RigidBody: {fileID: 0}
 --- !u!1 &1770493998
 GameObject:
   m_ObjectHideFlags: 0
