@@ -76,16 +76,15 @@ public class BloxManager : MonoBehaviour
     }
 
     public GameObject GetParent(){
-        Debug.Log(transform.parent.gameObject.name);
-         Debug.Log(transform.gameObject.name);
-          Debug.Log("lllllllllllllll");
+
         return transform.parent.gameObject;
     }
    private void UpdateBloxLive(int value)
     {
-        int spriteNum = value / (startLives / _spriteAtlas.spriteCount);
+        float spriteNum = ((float)value / startLives);
+        int num = (int)(spriteNum*_spriteAtlas.spriteCount);
       //  Debug.Log("boxlives "+ spriteNum);
-        _spriteRenderer.sprite = _spriteAtlas.GetSprite(spriteNum.ToString());
+        _spriteRenderer.sprite = _spriteAtlas.GetSprite(num.ToString());
       //  Debug.Log("Setting spritenum: " + spriteNum.ToString());
     }
 
