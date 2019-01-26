@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Button.ButtonClickedEvent _mainMenuPlayClickEvent;
     [SerializeField]
+    private Button.ButtonClickedEvent _mainMenuQuitClickEvent;
+    [SerializeField]
     private int _goodTimeSeconds;
     [SerializeField]
     private int _fineTimeSeconds;
@@ -37,11 +39,20 @@ public class GameManager : MonoBehaviour
 
         _mainMenu = Instantiate(_mainMenuPrefab, Vector3.zero, Quaternion.identity);
         _mainMenu.playButton.onClick = _mainMenuPlayClickEvent;
+        _mainMenu.quitButton.onClick = _mainMenuQuitClickEvent;
 
         _endScreen = Instantiate(_endScreenPrefab, Vector3.zero, Quaternion.identity);
         _endScreen.gameObject.SetActive(false);
 
         OpenMainMenu();
+    }
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            OpenMainMenu();
+        }
     }
 
     public void StartGamePlay()
@@ -84,7 +95,12 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(ReloadSceneAfterDelay(4f));
     }
-    
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     private IEnumerator ReloadSceneAfterDelay(float delaySeconds)
     {
         yield return new WaitForSecondsRealtime(delaySeconds);

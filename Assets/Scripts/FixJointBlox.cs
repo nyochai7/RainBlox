@@ -56,8 +56,15 @@ public class FixJointBlox : MonoBehaviour
 			}
 		}
 	}
-	
-	public void UnJointBlox()
+    private void OnCollisionStay(Collision collision)
+    {
+        if(MoveObject.CurrentMovingBlox == this)
+        {
+            
+        }
+    }
+
+    public void UnJointBlox()
 	{
 		FixedJoint2D[] joints = FindObjectsOfType<FixedJoint2D>();
 		for (int i = joints.Length - 1; i >= 0 ; i--)

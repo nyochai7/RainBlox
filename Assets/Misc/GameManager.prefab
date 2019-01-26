@@ -45,6 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainMenuPrefab: {fileID: 5396279558027880815, guid: 219e55115cf26af4a904e1966040cba4,
     type: 3}
+  _endScreenPrefab: {fileID: 8625977578525315248, guid: aca08afa7c0d49c439d47adcc2bb250c,
+    type: 3}
   _mainMenuPlayClickEvent:
     m_PersistentCalls:
       m_Calls:
@@ -61,3 +63,21 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  _mainMenuQuitClickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2303582484943603080}
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _goodTimeSeconds: 0
+  _fineTimeSeconds: 0

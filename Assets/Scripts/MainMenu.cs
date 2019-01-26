@@ -5,4 +5,5 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     public Button playButton;
+    public Button quitButton;
 }
