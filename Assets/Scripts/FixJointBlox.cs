@@ -25,7 +25,6 @@ public class FixJointBlox : MonoBehaviour
 
 		if (MoveObject.CurrentMovingBlox == this && tempCollider.gameObject.CompareTag("blox"))
 		{
-			BloxInteractions.DisableRigidbodys();
 			MoveObject.CurrentMovingBlox.Colliders.Add(tempCollider);
 			Arrow.IsEnabled = true;
 			Arrow.FollowTarget = this.gameObject;
@@ -82,12 +81,9 @@ public class FixJointBlox : MonoBehaviour
 		if (MoveObject.CurrentMovingBlox == this)
 		{
 			FixJointBlox fixJointBlox = null;
-			float radius = GetComponent<Collider2D>().bounds.size.x;
 
 			for (int i = 0; i < Colliders.Count; i++)
 			{
-                Vector3 direction = (Colliders[i].gameObject.transform.position - MoveObject.currentMovingBlox.transform.position).normalized;
-
                 Collider2D[] overlappingColliders = Physics2D.OverlapBoxAll((Vector2)transform.position,
                                                                        (Vector2)GetComponent<Collider2D>().bounds.size,
                                                                         transform.rotation.eulerAngles.z,

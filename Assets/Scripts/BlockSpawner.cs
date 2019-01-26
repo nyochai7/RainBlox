@@ -28,8 +28,6 @@ public class BlockSpawner : MonoBehaviour
         //Debug.Log("Time left: " + (nextDropTime - Time.time));
         if (Time.time >= nextDropTime)
         {
-
-            Debug.Log("Creating!!");
             Rigidbody2D newBlock = GameObject.Instantiate<Rigidbody2D>(blockTemplate);
             newBlock.transform.position = this.transform.position;
 
