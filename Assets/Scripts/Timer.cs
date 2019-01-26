@@ -105,7 +105,7 @@ public class Timer : MonoBehaviour
             {
                 isRaining = false;
                 isCoolingDown = true;
-                timeLeft = rainStartInterval * coolDownTimes;
+                timeLeft = rainStartInterval;
                 rainScript.RainIntensity = 0;
                 fmodEvent.setValue(0);
 
