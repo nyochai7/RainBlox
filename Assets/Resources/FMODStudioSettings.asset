@@ -59,6 +59,5 @@ MonoBehaviour:
   - Platform: 2
     Value: 32
   Plugins: []
-  MasterBanks:
-  - Master Bank
+  MasterBanks: []
   Banks: []
