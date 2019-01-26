@@ -6,8 +6,8 @@ using UnityEngine;
 public class FixJointBlox : MonoBehaviour
 {
 	[HideInInspector] public List<Collider2D> Colliders = new List<Collider2D>();
+	[HideInInspector] public List<FixedJoint2D> FixJoints = new List<FixedJoint2D>();
 	[HideInInspector] public Rigidbody2D RigidBody;
-	private List<FixedJoint2D> fixJoints = new List<FixedJoint2D>();
 
 	private void Awake()
 	{
@@ -69,12 +69,12 @@ public class FixJointBlox : MonoBehaviour
 			}
 		}
 
-		for (int i = fixJoints.Count - 1; i >= 0; i--)
+		for (int i = FixJoints.Count - 1; i >= 0; i--)
 		{
-			Destroy(fixJoints[i]);
+			Destroy(FixJoints[i]);
 		}
 
-		fixJoints.Clear();
+		FixJoints.Clear();
 	}
 
 	public void StickFixJointBlox()
@@ -123,7 +123,7 @@ public class FixJointBlox : MonoBehaviour
 			FixedJoint2D thisFixedJoint2D = gameObject.AddComponent<FixedJoint2D>();
 			thisFixedJoint2D.connectedBody = fixJointBlox.RigidBody;
 			thisFixedJoint2D.connectedAnchor = fixJointBlox.transform.position;
-			fixJoints.Add(thisFixedJoint2D);
+			FixJoints.Add(thisFixedJoint2D);
 		}
 	}
 }

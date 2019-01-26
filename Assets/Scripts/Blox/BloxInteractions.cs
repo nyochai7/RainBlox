@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class BloxInteractions : MonoBehaviour
 {
-	[SerializeField] private static FixJointBlox[] fixJointBloxs;
-
-	private void Awake()
-	{
-		fixJointBloxs = FindObjectsOfType<FixJointBlox>();
-	}
-
 	public static void DisableRigidbodys()
 	{
-		FixJointBlox excludedFixJointBlox = MoveObject.CurrentMovingBlox;
+		FixJointBlox[] fixJointBloxs = FindObjectsOfType<FixJointBlox>();
 		for (int i = 0; i < fixJointBloxs.Length; i++)
 		{
-			if (fixJointBloxs[i] != excludedFixJointBlox && fixJointBloxs[i].gameObject.tag == "blox")
+			if (fixJointBloxs[i] != MoveObject.CurrentMovingBlox && fixJointBloxs[i].gameObject.tag == "blox")
 			{
 				EnableRigidbody(fixJointBloxs[i], false);
 			}
@@ -25,6 +18,7 @@ public class BloxInteractions : MonoBehaviour
 
 	public static void EnableAllRigidbodys()
 	{
+		FixJointBlox[] fixJointBloxs = FindObjectsOfType<FixJointBlox>();
 		foreach (var item in fixJointBloxs)
 		{
 			EnableRigidbody(item, true);
