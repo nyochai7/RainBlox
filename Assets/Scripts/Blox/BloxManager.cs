@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
-public class BloxManager : MonoBehaviour, IBlox
+public class BloxManager : MonoBehaviour
 {
     public int startLives = 8;
     [SerializeField] SpriteAtlas _spriteAtlas;
@@ -34,17 +34,12 @@ public class BloxManager : MonoBehaviour, IBlox
         set
         {
             SetBloxSize(value);
-
+            
              _bloxSize = value;
         }
     }
 
-	public Sprite Sprite
-	{
-		get { return _spriteRenderer.sprite; }
-	}
-
-	public int BloxLives
+    public int BloxLives
     {
         get { return _bloxLives; }
         set
@@ -62,7 +57,7 @@ public class BloxManager : MonoBehaviour, IBlox
         }
     }
 
-	private void SetBloxSize(int size)
+    private void SetBloxSize(int size)
     {
         transform.localScale = new Vector3(size,1,1);
         if( _rigidbody2D == null) _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -76,7 +71,7 @@ public class BloxManager : MonoBehaviour, IBlox
 
     private void UpdateBloxLive(int value)
     {
-       int spriteNum = startLives - value;
+      //  int spriteNum = value / (startLives / _spriteAtlas.spriteCount);
        // Debug.Log("NAAMAAA: " + spriteNum.ToString());
         _spriteRenderer.sprite = _spriteAtlas.GetSprite(value.ToString());
         //Debug.Log(_spriteRenderer.ToString());

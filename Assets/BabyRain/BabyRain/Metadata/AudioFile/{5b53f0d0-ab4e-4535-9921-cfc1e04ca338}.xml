@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.09.00">
+    <object class="AudioFile" id="{5b53f0d0-ab4e-4535-9921-cfc1e04ca338}">
+        <property name="assetPath">
+            <value>BabyRain_Sun.ogg</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>40.5</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{3cb5ef00-5d8c-47ce-ab01-f820bf559540}</destination>
+        </relationship>
+    </object>
+</objects>
