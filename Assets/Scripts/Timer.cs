@@ -18,6 +18,7 @@ public class Timer : MonoBehaviour
     bool isCoolingDown = false;
     bool isRaining = false;
 
+    int coolDownTimes = 1;
     float timeLeft = 0;
     [SerializeField]
     private RainScript2D rainScript;
@@ -95,6 +96,7 @@ public class Timer : MonoBehaviour
 
         if (isRaining)
         {
+            coolDownTimes ++;
             timerFg.sizeDelta = new Vector2(timerBg.rect.width - (timerBg.rect.width * (timeLeft / rainDuration)), timerBg.rect.height);
 
             timeLeft -= Time.deltaTime;
@@ -103,7 +105,7 @@ public class Timer : MonoBehaviour
             {
                 isRaining = false;
                 isCoolingDown = true;
-                timeLeft = rainStartInterval;
+                timeLeft = rainStartInterval * coolDownTimes;
                 rainScript.RainIntensity = 0;
                 fmodEvent.setValue(0);
 
