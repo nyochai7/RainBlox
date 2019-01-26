@@ -30,6 +30,12 @@ public class Timer : MonoBehaviour
     [SerializeField]
     private float rainDuration;
 
+    [SerializeField] 
+     private Transform liightnings;
+
+     [SerializeField] 
+     private Transform[] liightningAnchors;
+
     public event Action OnRain;
 
     public void RestartTimer(int timeLeft)
@@ -37,7 +43,14 @@ public class Timer : MonoBehaviour
         isCoolingDown = true;
         this.timeLeft = timeLeft;
     }
-
+    public IEnumerator ShowLightning(){
+    int rand = UnityEngine.Random.Range(0,liightningAnchors.Length);
+    liightnings.gameObject.SetActive(true);
+    liightnings.position = liightningAnchors[rand].position;
+    liightnings.rotation = liightningAnchors[rand].rotation;
+    yield return new WaitForSeconds (0.4f);
+    liightnings.gameObject.SetActive(false);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +76,7 @@ public class Timer : MonoBehaviour
                 isRaining = true;
                 timeLeft = rainDuration;
                 rainScript.RainIntensity = 1;
+               StartCoroutine(ShowLightning());
             }
         }
 
