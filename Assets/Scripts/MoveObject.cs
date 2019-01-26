@@ -74,4 +74,9 @@ public class MoveObject : MonoBehaviour
 			rigidbody.MovePosition(new Vector2(mouseWorldPosition.x * speed * Time.deltaTime, mouseWorldPosition.y * speed * Time.deltaTime));
 		}
 	}
+
+	private void OnDestroy()
+	{
+		fixJointBlox.UnJointBlox();
+	}
 }

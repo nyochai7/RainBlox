@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/ItkesAndNumusWack.unity
+    guid: 1712b90348206964eb539a906519ac47
   m_configObjects: {}
