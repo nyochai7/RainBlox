@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f55548442f2e2c46a16c4424fac75c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLives: 1000
+  startLives: 700
   _spriteAtlas: {fileID: 4343727234628468602, guid: ee4468e06cd003b4a88718bac445bf64,
     type: 2}
 --- !u!1 &3096010072475909886
