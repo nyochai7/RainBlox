@@ -3665,6 +3665,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2303582484943603080, guid: 982af46e56c9ec440a267eb4a81b3dd4,
+        type: 3}
+      propertyPath: _endScreenPrefab
+      value: 
+      objectReference: {fileID: 8625977578525315248, guid: aca08afa7c0d49c439d47adcc2bb250c,
+        type: 3}
+    - target: {fileID: 2303582484943603080, guid: 982af46e56c9ec440a267eb4a81b3dd4,
+        type: 3}
+      propertyPath: _goodTimeSeconds
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303582484943603080, guid: 982af46e56c9ec440a267eb4a81b3dd4,
+        type: 3}
+      propertyPath: _fineTimeSeconds
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303582484943603080, guid: 982af46e56c9ec440a267eb4a81b3dd4,
+        type: 3}
+      propertyPath: _badTimeSeconds
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 982af46e56c9ec440a267eb4a81b3dd4, type: 3}
 --- !u!1 &2078637183

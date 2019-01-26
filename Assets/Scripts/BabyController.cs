@@ -152,5 +152,7 @@ public class BabyController : MonoBehaviour, IDamagable
     {
         _isDead = true;
         SoundManager.Instance.Play("game_over");
+        transform.position = Vector3.one * 10000f;
+        GameManager.Instance.EndGame();
     }
 }
