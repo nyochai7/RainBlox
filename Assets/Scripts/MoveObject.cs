@@ -5,34 +5,59 @@ using UnityEngine.EventSystems;
 
 public class MoveObject : MonoBehaviour
 {
-	public static GameObject CurrentMovingBlox = null;
+	public static FixJointBlox currentMovingBlox = null;
+	public static FixJointBlox CurrentMovingBlox
+	{
+		get { return currentMovingBlox; }
+		set
+		{
+			if (value == null && currentMovingBlox != null)
+			{
+				Arrow.IsEnabled = false;
+			}
+
+			currentMovingBlox = value;
+		}
+	}
+
 	private Rigidbody2D rigidbody;
 	private float speed = 50;
 	private bool isFollowingMouse = false;
+	private FixJointBlox fixJointBlox;
 
 	private void Awake()
 	{
 		rigidbody = GetComponent<Rigidbody2D>();
+		fixJointBlox = GetComponent<FixJointBlox>();
+	}
+
+	private void Start()
+	{
+		Arrow.IsEnabled = false;
 	}
 
 	private void OnMouseDown()
 	{
-		CurrentMovingBlox = gameObject;
+		if (CurrentMovingBlox != fixJointBlox  && CurrentMovingBlox != null && CurrentMovingBlox.Colliders != null)
+		{
+			CurrentMovingBlox.Colliders.Clear();
+		}
+
+		CurrentMovingBlox = fixJointBlox;
 		isFollowingMouse = true;
 	}
 
 	private void OnMouseUp()
 	{
-		isFollowingMouse = false;
-		StartCoroutine(WaitFrame());
+		if (CurrentMovingBlox == fixJointBlox && CurrentMovingBlox != null)
+		{
+			BloxInteractions.EnableAllRigidbodys();
+			CurrentMovingBlox.StickFixJointBlox();
+			isFollowingMouse = false;
+			CurrentMovingBlox = null;
+		}
 	}
-
-	IEnumerator WaitFrame()
-	{
-		yield return null;
-		CurrentMovingBlox = null;
-	}
-
+	
 	private void FixedUpdate()
 	{
 		if (isFollowingMouse)
