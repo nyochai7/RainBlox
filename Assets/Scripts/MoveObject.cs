@@ -20,7 +20,7 @@ public class MoveObject : MonoBehaviour
 		}
 	}
 
-	private Rigidbody2D rigidbody;
+	private new Rigidbody2D rigidbody;
 	private float speed = 50;
 	private bool isFollowingMouse = false;
 	private FixJointBlox fixJointBlox;
@@ -57,7 +57,15 @@ public class MoveObject : MonoBehaviour
 			CurrentMovingBlox = null;
 		}
 	}
-	
+
+	private void OnMouseOver()
+	{
+		if (Input.GetKeyDown(KeyCode.Mouse1))
+		{
+			fixJointBlox.UnJointBlox();
+		}
+	}
+
 	private void FixedUpdate()
 	{
 		if (isFollowingMouse)

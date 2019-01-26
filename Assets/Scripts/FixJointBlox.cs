@@ -5,15 +5,13 @@ using UnityEngine;
 
 public class FixJointBlox : MonoBehaviour
 {
-	[SerializeField] private List<FixedJoint2D> fixJoints;
-	public List<Collider2D> Colliders = new List<Collider2D>();
+	[HideInInspector] public List<Collider2D> Colliders = new List<Collider2D>();
 	[HideInInspector] public Rigidbody2D RigidBody;
-	private Collider2D myCollider;
+	private List<FixedJoint2D> fixJoints = new List<FixedJoint2D>();
 
 	private void Awake()
 	{
 		RigidBody = GetComponent<Rigidbody2D>();
-		myCollider = GetComponent<Collider2D>();
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
@@ -27,13 +25,6 @@ public class FixJointBlox : MonoBehaviour
 
 		if (MoveObject.CurrentMovingBlox == this && tempCollider.gameObject.CompareTag("blox"))
 		{
-			//Debug.Log("going over blocks");
-
-			//foreach (var thing in collisions)
-			//{
-			//	Debug.Log(thing.gameObject.tag);
-			//}
-
 			BloxInteractions.DisableRigidbodys();
 			MoveObject.CurrentMovingBlox.Colliders.Add(tempCollider);
 			Arrow.IsEnabled = true;
@@ -64,26 +55,26 @@ public class FixJointBlox : MonoBehaviour
 			{
 				Arrow.IsEnabled = false;
 			}
-
-			//PrintCollisionListTags();
 		}
 	}
-
-	private void Update()
+	
+	public void UnJointBlox()
 	{
-		if (Input.GetKeyDown(KeyCode.Mouse1))
+		FixedJoint2D[] joints = FindObjectsOfType<FixedJoint2D>();
+		for (int i = joints.Length - 1; i >= 0 ; i--)
 		{
-			UnJointBlox();
+			if(joints[i].connectedBody == RigidBody)
+			{
+				Destroy(joints[i]);
+			}
 		}
-	}
 
-	private void UnJointBlox()
-	{
-		Vector2	mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		if (myCollider.bounds.Contains(mouseWorldPosition))
+		for (int i = fixJoints.Count - 1; i >= 0; i--)
 		{
-			Debug.Log("check");
+			Destroy(fixJoints[i]);
 		}
+
+		fixJoints.Clear();
 	}
 
 	public void StickFixJointBlox()
@@ -91,22 +82,13 @@ public class FixJointBlox : MonoBehaviour
 		if (MoveObject.CurrentMovingBlox == this)
 		{
 			FixJointBlox fixJointBlox = null;
-			////Vector2 worldMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
 			float radius = 1.28f;
-			//Debug.Log(collisionList.Count);
 
 			for (int i = 0; i < Colliders.Count; i++)
 			{
-				//	Debug.Log(collisionList[i].gameObject.tag);
-
-				//	if (false)
-				//	{
 				float distance = Vector3.Distance(Colliders[i].gameObject.transform.position, MoveObject.currentMovingBlox.transform.position);
 				if (distance != 0)
 				{
-					//Debug.Log(Colliders[i].gameObject.name + " " + distance + " " + MoveObject.currentMovingBlox.name + "  " + (radius * 1.1f));
-
 					if (distance < (radius * 1.1f))
 					{
 						fixJointBlox = Colliders[i].gameObject.GetComponent<FixJointBlox>();
@@ -116,12 +98,10 @@ public class FixJointBlox : MonoBehaviour
 						}
 					}
 				}
-
 			}
 
 			if (fixJointBlox != null && fixJointBlox != this)
 			{
-				//Debug.Log("joint");
 				this.StickBloxes(fixJointBlox);
 			}
 		}
@@ -132,7 +112,7 @@ public class FixJointBlox : MonoBehaviour
 		FixedJoint2D[] fixedJoint2Ds = GetComponents<FixedJoint2D>();
 		for (int i = 0; i < fixedJoint2Ds.Length; i++)
 		{
-			if (fixedJoint2Ds[i].connectedBody == fixJointBlox)
+			if (fixedJoint2Ds[i].connectedBody == fixJointBlox.RigidBody)
 			{
 				return;
 			}
@@ -141,15 +121,8 @@ public class FixJointBlox : MonoBehaviour
 		if (fixJointBlox.RigidBody != RigidBody)
 		{
 			FixedJoint2D thisFixedJoint2D = gameObject.AddComponent<FixedJoint2D>();
-			FixedJoint2D otherFixedJoint2D = fixJointBlox.gameObject.AddComponent<FixedJoint2D>();
-
 			thisFixedJoint2D.connectedBody = fixJointBlox.RigidBody;
-			otherFixedJoint2D.connectedBody = thisFixedJoint2D.attachedRigidbody;
-
 			thisFixedJoint2D.connectedAnchor = fixJointBlox.transform.position;
-			otherFixedJoint2D.connectedAnchor = thisFixedJoint2D.transform.position;
-
-			fixJointBlox.fixJoints.Add(otherFixedJoint2D);
 			fixJoints.Add(thisFixedJoint2D);
 		}
 	}
